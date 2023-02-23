@@ -1,14 +1,14 @@
 {
     "builds": [
       {
-        "src": "api/linebotcar.py",
+        "src": "api/index.py",
         "use": "@vercel/python"
       }
     ],
     "routes": [
       {
         "src": "/(.*)",
-        "dest": "api/linebotcar.py"
+        "dest": "api/index.py"
       }
     ]
   }
