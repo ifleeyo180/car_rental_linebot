@@ -55,7 +55,7 @@ def callback():
     return 'OK'
 
 
-'''
+
 # 借用公務車
     # LINE Bot 訊息回覆
 @handler.add(MessageEvent, message=TextMessage)
@@ -181,7 +181,7 @@ def handle_message(event):
                 event.reply_token,
                 TextSendMessage(text=f"{car_number} 目前沒有被借用")
             )
-'''
+
 
 
 if __name__ == "__main__":
