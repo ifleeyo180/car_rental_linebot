@@ -33,6 +33,7 @@ gc = pygsheets.authorize(service_account_env_var='GOOGLE_SHEET_CREDENTIALS')
 worksheet_headers = ['車牌', '借用人姓名', '借用日期', '還車人姓名', '還車日期', '借用狀態']
 car_database = ['ABC-123', 'XYZ-456']
 
+
 # Flask 應用程式
 app = Flask(__name__)
 
@@ -40,6 +41,8 @@ app = Flask(__name__)
 def home():
     return 'Hello, World!'
 
+
+'''
 # LINE Bot Webhook 接口
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -52,7 +55,7 @@ def callback():
     return 'OK'
 
 
-'''
+
 # 借用公務車
     # LINE Bot 訊息回覆
 @handler.add(MessageEvent, message=TextMessage)
@@ -181,5 +184,5 @@ def handle_message(event):
 '''
 
 
-if __name__ == "__main__":
-    app.run()
+# if __name__ == "__main__":
+#     app.run()
