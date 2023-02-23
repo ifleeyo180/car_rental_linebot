@@ -24,10 +24,10 @@ spreadsheet_key = config.get('google-sheet', 'spreadsheet_key')
 worksheet_name = config.get('google-sheet', 'worksheet_name')
 '''
 
-google_sheet_id = os.environ.get('GOOGLE_SHEET_ID')
-google_sheet_creds = os.environ.get('GOOGLE_SHEET_CREDENTIALS')
-line_bot_channel_access_token = os.environ.get('LINE_BOT_CHANNEL_ACCESS_TOKEN')
-line_channel_secret = os.environ.get('LINE_CHANNEL_SECRET')
+google_sheet_id = os.getenv('GOOGLE_SHEET_ID')
+google_sheet_creds = os.getenv('GOOGLE_SHEET_CREDENTIALS')
+line_bot_channel_access_token = os.getenv('LINE_BOT_CHANNEL_ACCESS_TOKEN')
+line_channel_secret = os.getenv('LINE_CHANNEL_SECRET')
 
 worksheet_headers = ['車牌', '借用人姓名', '借用日期', '還車人姓名', '還車日期', '借用狀態']
 car_database = ['ABC-123', 'XYZ-456']
