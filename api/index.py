@@ -42,7 +42,7 @@ def home():
     return 'Hello, World!'
 
 
-'''
+
 # LINE Bot Webhook 接口
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -181,7 +181,7 @@ def handle_message(event):
                 event.reply_token,
                 TextSendMessage(text=f"{car_number} 目前沒有被借用")
             )
-'''
+
 
 
 # if __name__ == "__main__":
