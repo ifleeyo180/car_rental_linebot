@@ -50,13 +50,6 @@ def callback():
         abort(400)
     return 'OK'
 
-# LINE Bot 訊息回覆
-
-
-@handler.add(MessageEvent, message=TextMessage)
-def handle_message(event):
-    user_input = event.message.text
-
 # 借用公務車
     # LINE Bot 訊息回覆
 @handler.add(MessageEvent, message=TextMessage)
