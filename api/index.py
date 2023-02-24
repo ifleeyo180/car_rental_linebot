@@ -46,16 +46,17 @@ def home():
 # LINE Bot Webhook 接口
 @app.route("/callback", methods=['POST'])
 def callback():
-    if request.path != '/callback':
-        abort(400)
+    # get X-Line-Signature header value
     signature = request.headers['X-Line-Signature']
+    # get request body as text
     body = request.get_data(as_text=True)
+    app.logger.info("Request body: " + body)
+    # handle webhook body
     try:
-        handler.handle(body, signature)
+        line_handler.handle(body, signature)
     except InvalidSignatureError:
         abort(400)
     return 'OK'
-
 
 
 # 借用公務車
