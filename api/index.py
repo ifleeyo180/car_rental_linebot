@@ -7,7 +7,7 @@ from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
 import pygsheets
 import configparser
-
+import json
 # Local test settings
 '''
 # LINE Bot 基本資料
