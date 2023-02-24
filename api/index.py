@@ -24,6 +24,12 @@ spreadsheet_key = config.get('google-sheet', 'spreadsheet_key')
 worksheet_name = config.get('google-sheet', 'worksheet_name')
 '''
 
+class MyClass:
+    pass
+
+print(issubclass(MyClass, object))  # True
+
+
 google_sheet_id = os.getenv('GOOGLE_SHEET_ID')
 google_sheet_creds = os.getenv('GOOGLE_SHEET_CREDENTIALS')
 line_bot_channel_access_token = os.getenv('LINE_BOT_CHANNEL_ACCESS_TOKEN')
