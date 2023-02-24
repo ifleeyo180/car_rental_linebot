@@ -2,3 +2,4 @@
 config.ini
 googleapi.json
 .DS_Store
+.vercel
