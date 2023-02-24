@@ -24,13 +24,12 @@ gc = pygsheets.authorize(service_file=config.get(
 spreadsheet_key = config.get('google-sheet', 'spreadsheet_key')
 worksheet_name = config.get('google-sheet', 'worksheet_name')
 '''
-
 google_sheet_id = os.getenv('GOOGLE_SHEET_ID')
 line_bot_channel_access_token = os.getenv('LINE_BOT_CHANNEL_ACCESS_TOKEN')
 line_channel_secret = os.getenv('LINE_CHANNEL_SECRET')
-handler = WebhookHandler(os.getenv('LINE_CHANNEL_SECRET'))
+handler = WebhookHandler(line_channel_secret)
 line_bot_api = LineBotApi(line_bot_channel_access_token)
-creds_base64 = os.getenv('GOOGLE_SHEET_CREDENTIALS_BASE64')
+creds_base64 = os.environ['GOOGLE_SERVICE_KEY']
 creds_json = base64.b64decode(creds_base64).decode('utf-8')
 creds = json.loads(creds_json)
 gc = pygsheets.authorize(service_account_info=creds)
