@@ -8,6 +8,7 @@ from linebot.models import MessageEvent, TextMessage, TextSendMessage
 import pygsheets
 import configparser
 import json
+import base64
 # Local test settings
 '''
 # LINE Bot 基本資料
@@ -25,15 +26,14 @@ worksheet_name = config.get('google-sheet', 'worksheet_name')
 '''
 
 google_sheet_id = os.getenv('GOOGLE_SHEET_ID')
-google_sheet_creds = json.loads(os.environ.get('GOOGLE_SHEET_CREDENTIALS'))
 line_bot_channel_access_token = os.getenv('LINE_BOT_CHANNEL_ACCESS_TOKEN')
 line_channel_secret = os.getenv('LINE_CHANNEL_SECRET')
-gc = pygsheets.authorize(service_account_env_var='GOOGLE_SHEET_CREDENTIALS')
 handler = WebhookHandler(os.getenv('LINE_CHANNEL_SECRET'))
 line_bot_api = LineBotApi(line_bot_channel_access_token)
-
-spreadsheet_key = '1wL4CKYikFTFb7WiD4dFYjwnkCSmmjd5cqMDxdBR7uXg'
-worksheet_name = '車輛租借紀錄'
+creds_base64 = os.environ['GOOGLE_SHEET_CREDENTIALS']
+creds_json = base64.b64decode(creds_base64).decode('utf-8')
+creds = json.loads(creds_json)
+gc = pygsheets.authorize(service_account_info=creds)
 
 worksheet_headers = ['車牌', '借用人姓名', '借用日期', '還車人姓名', '還車日期', '借用狀態']
 car_database = ['ABC-123', 'XYZ-456']
