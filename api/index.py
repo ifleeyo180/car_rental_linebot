@@ -29,10 +29,11 @@ line_bot_channel_access_token = os.getenv('LINE_BOT_CHANNEL_ACCESS_TOKEN')
 line_channel_secret = os.getenv('LINE_CHANNEL_SECRET')
 handler = WebhookHandler(line_channel_secret)
 line_bot_api = LineBotApi(line_bot_channel_access_token)
+
 creds_base64 = os.getenv('GOOGLE_SHEET_CREDENTIALS')
 creds_json = base64.b64decode(creds_base64).decode('utf-8')
 creds = json.loads(creds_json)
-gc = pygsheets.authorize(service_file=os.environ['GOOGLE_APPLICATION_CREDENTIALS'])
+gc = pygsheets.authorize(service_file=creds)
 
 
 
