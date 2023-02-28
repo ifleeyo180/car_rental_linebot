@@ -9,6 +9,9 @@ import pygsheets
 import configparser
 import json
 import base64
+from google.oauth2 import service_account
+from google.cloud import vision_v1
+
 # Local test settings
 '''
 # LINE Bot 基本資料
@@ -24,16 +27,18 @@ gc = pygsheets.authorize(service_file=config.get(
 spreadsheet_key = config.get('google-sheet', 'spreadsheet_key')
 worksheet_name = config.get('google-sheet', 'worksheet_name')
 '''
-google_sheet_id = os.getenv('GOOGLE_SHEET_ID')
+
+google_sheet_id = os.getenv('GOOGLE_SHEET_KEY')
 line_bot_channel_access_token = os.getenv('LINE_BOT_CHANNEL_ACCESS_TOKEN')
 line_channel_secret = os.getenv('LINE_CHANNEL_SECRET')
 handler = WebhookHandler(line_channel_secret)
 line_bot_api = LineBotApi(line_bot_channel_access_token)
 
-creds_base64 = os.getenv('GOOGLE_SHEET_CREDENTIALS')
-creds_json = base64.b64decode(creds_base64).decode('utf-8')
-creds = json.loads(creds_json)
+creds_dict = json.loads(base64.b64decode(os.getenv('GOOGLE_SERVICE_KEY')).decode("utf-8"))
+creds = service_account.Credentials.from_service_account_info(creds_dict)
 gc = pygsheets.authorize(service_file=creds)
+
+client = vision_v1.ImageAnnotatorClient(credentials=creds)
 
 
 
