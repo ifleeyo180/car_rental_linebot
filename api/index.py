@@ -6,12 +6,36 @@ from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
 import pygsheets
-import configparser
 import json
 import base64
 from google.oauth2 import service_account
-from google.cloud import vision
-from google.cloud.vision_v1 import ImageAnnotatorClient
+from google.cloud import vision_v1
+
+google_sheet_id = os.getenv('GOOGLE_SHEET_KEY')
+line_bot_channel_access_token = os.getenv('LINE_BOT_CHANNEL_ACCESS_TOKEN')
+line_channel_secret = os.getenv('LINE_CHANNEL_SECRET')
+handler = WebhookHandler(line_channel_secret)
+line_bot_api = LineBotApi(line_bot_channel_access_token)
+
+creds_dict = json.loads(base64.b64decode(os.getenv('GOOGLE_SERVICE_KEY')).decode("utf-8"))
+creds = service_account.Credentials.from_service_account_info(creds_dict)
+client = vision_v1.ImageAnnotatorClient(credentials=creds)
+gc = pygsheets.authorize(service_account_file=creds)
+
+worksheet_headers = ['車牌', '借用人姓名', '借用日期', '還車人姓名', '還車日期', '借用狀態']
+car_database = ['ABC-123', 'XYZ-456']
+
+# Flask 應用程式
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return 'Hello, World!'
+
+# LINE Bot Webhook 接口
+@app.route("/callback", methods=['POST'])
+def callback():
+    # get X-Line
 
 
 # Local test settings
