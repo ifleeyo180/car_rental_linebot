@@ -10,7 +10,9 @@ import configparser
 import json
 import base64
 from google.oauth2 import service_account
-from google.cloud import vision_v1
+from google.cloud import vision
+from google.cloud.vision_v1 import ImageAnnotatorClient
+
 
 # Local test settings
 '''
@@ -36,9 +38,10 @@ line_bot_api = LineBotApi(line_bot_channel_access_token)
 
 creds_dict = json.loads(base64.b64decode(os.getenv('GOOGLE_SERVICE_KEY')).decode("utf-8"))
 creds = service_account.Credentials.from_service_account_info(creds_dict)
+client = ImageAnnotatorClient(credentials=creds)
+
 gc = pygsheets.authorize(service_file=creds)
 
-client = vision_v1.ImageAnnotatorClient(credentials=creds)
 
 
 
