@@ -19,7 +19,6 @@ line_bot_api = LineBotApi(line_bot_channel_access_token)
 creds_json = os.environ.get('GOOGLE_SHEET_CREDENTIALS')
 creds_dict = json.loads(creds_json)
 creds = service_account.Credentials.from_service_account_info(creds_dict)
-
 gc = pygsheets.authorize(custom_credentials=creds)
 
 worksheet_headers = ['車牌', '借用人姓名', '借用日期', '還車人姓名', '還車日期', '借用狀態']
