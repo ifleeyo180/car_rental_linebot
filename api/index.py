@@ -35,56 +35,6 @@ def home():
 # LINE Bot Webhook 接口
 @app.route("/callback", methods=['POST'])
 def callback():
-    # get X-Line
-
-
-# Local test settings
-'''
-# LINE Bot 基本資料
-config = configparser.ConfigParser()
-config.read('config.ini')
-
-line_bot_api = LineBotApi(config.get('line-bot', 'channel_access_token'))
-handler = WebhookHandler(config.get('line-bot', 'channel_secret'))
-
-# Google Sheets 基本資料
-gc = pygsheets.authorize(service_file=config.get(
-    'google-sheet', 'credentials_file'))
-spreadsheet_key = config.get('google-sheet', 'spreadsheet_key')
-worksheet_name = config.get('google-sheet', 'worksheet_name')
-'''
-
-google_sheet_id = os.getenv('GOOGLE_SHEET_KEY')
-line_bot_channel_access_token = os.getenv('LINE_BOT_CHANNEL_ACCESS_TOKEN')
-line_channel_secret = os.getenv('LINE_CHANNEL_SECRET')
-handler = WebhookHandler(line_channel_secret)
-line_bot_api = LineBotApi(line_bot_channel_access_token)
-
-creds_dict = json.loads(base64.b64decode(os.getenv('GOOGLE_SERVICE_KEY')).decode("utf-8"))
-creds = service_account.Credentials.from_service_account_info(creds_dict)
-client = ImageAnnotatorClient(credentials=creds)
-
-gc = pygsheets.authorize(service_file=creds)
-
-
-
-
-worksheet_headers = ['車牌', '借用人姓名', '借用日期', '還車人姓名', '還車日期', '借用狀態']
-car_database = ['ABC-123', 'XYZ-456']
-
-
-# Flask 應用程式
-app = Flask(__name__)
-
-@app.route('/')
-def home():
-    return 'Hello, World!'
-
-
-
-# LINE Bot Webhook 接口
-@app.route("/callback", methods=['POST'])
-def callback():
     # get X-Line-Signature header value
     signature = request.headers['X-Line-Signature']
     # get request body as text
@@ -103,8 +53,6 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     user_input = event.message.text
-
-    # 借用公務車
     if user_input.startswith("借車"):
         input_list = user_input.split()
         if len(input_list) != 3:
