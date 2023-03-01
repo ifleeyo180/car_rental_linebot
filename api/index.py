@@ -17,7 +17,7 @@ line_channel_secret = os.getenv('LINE_CHANNEL_SECRET')
 handler = WebhookHandler(line_channel_secret)
 line_bot_api = LineBotApi(line_bot_channel_access_token)
 
-creds_json = json.loads(base64.b64decode(os.getenv('GOOGLE_SERVICE_KEY')).decode("utf-8"))
+creds_json = json.loads(base64.b64decode(os.getenv('GOOGLE_SHEET_CREDENTIALS')).decode("utf-8"))
 creds_path = 'creds.json'
 with open(creds_path, 'w') as f:
     json.dump(creds_json, f)
