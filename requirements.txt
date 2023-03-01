@@ -2,3 +2,7 @@ Flask==2.2.2
 line_bot_sdk==2.3.0
 protobuf==4.22.0
 pygsheets==2.0.6
+google-cloud-vision
+google-auth
+google-auth-oauthlib
+google-auth-httplib2
